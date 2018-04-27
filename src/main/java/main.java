@@ -5,54 +5,42 @@ public class main {
 
     public static void main(String[] args) {
 
-        System.out.printf(transposicaoTrilho("Leonardo", 2));
+        System.out.printf(railFence("Paulo", 2));
 
     }
 
-    public static String transposicaoTrilho(String texto, Integer qtdCamadas){
-        String fraseTransp = "";
-        ArrayList<String> controleTransp = new ArrayList<String>();
-        Integer controleVetor = 0;
-        Boolean controlePrimeiraVez = true;
+    public static String railFence(String text, Integer key){
+        String textTransp = "";
+        ArrayList<String> controlTransp = new ArrayList<String>();
+        Integer controlList = 0;
+        Boolean firstTime = true;
 
-        for (int i = 0; i < texto.length(); i++) {
-            if (!controlePrimeiraVez) {
-                if (String.valueOf(texto.charAt(i)) == " ") {
-                    controleTransp.set(controleVetor, "#");
-                } else {
-                    String temp = controleTransp.get(controleVetor)+""+texto.charAt(i);
-                    controleTransp.set(controleVetor, temp);
-                }
-
-                controleVetor++;
-
-                if (controleVetor == qtdCamadas) {
-                    controleVetor = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (!firstTime) {
+                String temp = controlTransp.get(controlList)+""+text.charAt(i);
+                controlTransp.set(controlList, temp);
+                controlList++;
+                if (controlList == key) {
+                    controlList = 0;
                 }
             }
             else {
-                if (controleTransp.size() < qtdCamadas) {
-                    if (String.valueOf(texto.charAt(i)) == " ") {
-                        controleTransp.add("#");
-                    } else {
-                        controleTransp.add(String.valueOf(texto.charAt(i)));
-                    }
-
-                    controleVetor++;
-
-                    if (controleTransp.size() == qtdCamadas) {
-                        controlePrimeiraVez = false;
-                        controleVetor = 0;
+                if (controlTransp.size() < key) {
+                    controlTransp.add(String.valueOf(text.charAt(i)));
+                    controlList++;
+                    if (controlTransp.size() == key) {
+                        firstTime = false;
+                        controlList = 0;
                     }
                 }
             }
         }
 
-        for (int i = 0; i<controleTransp.size(); i++){
-            fraseTransp += controleTransp.get(i);
+        for (int i = 0; i<controlTransp.size(); i++){
+            textTransp += controlTransp.get(i);
         }
 
-        return "TextEncrypt: "+ fraseTransp + " --- and key: "+qtdCamadas;
+        return "Rail Fence: "+ textTransp.replace(" ", "#") + " and key: "+key;
     }
 
 }
