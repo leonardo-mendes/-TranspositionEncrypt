@@ -26,7 +26,7 @@ public class main {
 
                 controleVetor++;
 
-                if (controleTransp.size() == qtdCamadas) {
+                if (controleVetor == qtdCamadas) {
                     controleVetor = 0;
                 }
             }
@@ -52,7 +52,7 @@ public class main {
             fraseTransp += controleTransp.get(i);
         }
 
-        return fraseTransp;
+        return "TextEncrypt: "+ fraseTransp + " --- and key: "+qtdCamadas;
     }
 
 }
