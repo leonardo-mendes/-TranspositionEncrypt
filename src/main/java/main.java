@@ -43,7 +43,7 @@ public class main {
             textTransp += controlTransp.get(i);
         }
 
-        return "Rail Fence: " + textTransp.replace(" ", "#") + " and key: " + key;
+        return "Rail Fence: " + textTransp.replace(" ", "#").toUpperCase() + " and key: " + key;
     }
 
     public static String rectangleTransp(String text, Integer key) {
@@ -69,11 +69,23 @@ public class main {
         }
 
         for (int i = 0; i < controlTransp.size(); i++) {
-            textTransp += controlTransp.get(controlPosition.get(i));
-            textKeys += controlPosition.get(i) + " ";
+            if(i != controlTransp.size()-1){
+                if(controlTransp.get(i).length() > controlTransp.get(i+1).length()){
+                    controlTransp.set(i+1, controlTransp.get(i+1)+"A");
+                }
+
+                if(controlTransp.get(i).length() < controlTransp.get(i+1).length()){
+                    controlTransp.set(i, controlTransp.get(i)+"A");
+                }
+            }
         }
 
-        return "Transposition by rectangle: " + textTransp + " and key: " + textKeys;
+        for (int i = 0; i < controlTransp.size(); i++) {
+            textTransp += controlTransp.get(i);
+            textKeys += (controlPosition.get(i)+1) + " ";
+        }
+
+        return "Transposition by rectangle: " + textTransp.toUpperCase() + " and key: " + textKeys;
     }
 
 }
